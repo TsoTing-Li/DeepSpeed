@@ -3172,7 +3172,7 @@ class DeepSpeedEngine(Module):
         if self.zero_has_nvme_offload():
             from shutil import copytree, disk_usage
             offload_dir = self.optimizer.optimizer_swapper.swap_folder
-            offload_ckpt_dir = os.path.join(save_dir, tag, "offloaded_tensors")
+            offload_ckpt_dir = os.path.join(save_dir, tag, "offloaded_tensors", os.path.basename(offload_dir))
             _, _, free = disk_usage(save_dir)
             logger.info(
                 f"Copying NVMe offload files from {offload_dir} to {offload_ckpt_dir}, {free / 1e9:,.2f} GB free on target filesystem..."
